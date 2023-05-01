@@ -93,6 +93,9 @@ public class UnweightedGraph<V> implements Graph<V> {
 		Stack<Integer> stack = new Stack<>();
 		
 		// Insert your code here
+		stack.push(v);
+		searchOrder.add(v);
+		isVisited[v] = true;
 		
 		return new SearchTree(v, parent, searchOrder);
 	}
