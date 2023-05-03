@@ -1,4 +1,4 @@
-package com.noah.Main;
+package com.noah.Exercise28_03;
 
 public interface Graph<V> {
 	/** Return the number of vertices in the graph */

@@ -1,4 +1,4 @@
-package com.noah.Main;
+package com.noah.Exercise28_03;
 
 public class Edge {
 	int u;
