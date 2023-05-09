@@ -45,7 +45,22 @@ public class UnweightedGraph<V> implements Graph<V> {
 	
 	// Returns the best path between two nodes
 	public List<Integer> getPath(int u, int v) {
-		return null;
+		SearchTree breadthFirstResult = bfs(u);
+		int current = v;
+		List<Integer> path = new ArrayList<Integer>();
+		
+		path.add(current);
+		while(breadthFirstResult.getParent(current) != -1) {
+			
+			if(current == u) {
+				break;
+			} else {
+				path.add(breadthFirstResult.getParent(current));
+			}
+			current = breadthFirstResult.getParent(current);
+		}
+		
+		return path;
 	}
 
 	/** Create adjacency lists for each vertex */
