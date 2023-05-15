@@ -61,6 +61,56 @@ public class UnweightedGraph<V> implements Graph<V> {
   
   // write code in here
   public List<Integer> getACycle() {
+	  List<Integer> list = new ArrayList<Integer>();
+	  for(int i = 0; i < vertices.size(); i++) {
+		  list.add(i);
+	  }
+	  boolean[] visited = new boolean[list.size()];
+	  int[] parent = new int[list.size()];
+	  
+	  for(int i = 0; i < list.size(); i++) {
+		  visited[i] = false;
+		  parent[i] = -1;
+	  }
+	  
+	  while(list.size() > 0) {
+		  int v = list.get(0);
+		  Stack<Integer> stack = new Stack<Integer>();
+		  
+		  stack.push(v);
+		  visited[v] = true;
+		  list.remove(new Integer(v));
+		  
+		  while(!stack.isEmpty()) {
+			  int x = stack.peek();
+			  if(neighbors.get(x).size() <= 0) {
+				  stack.pop();
+			  }
+			  for(int i = neighbors.get(x).size() - 1; i >= 0; --i) {
+				  Edge e = neighbors.get(x).get(i);
+				  if(!visited[e.v]) {
+					  parent[e.v] = x;
+					  stack.push(e.v);
+					  visited[e.v] = true;
+					  list.remove(new Integer(e.v));
+					  neighbors.get(x).remove(i);
+					  break;
+				  } else if(e.v != parent[x]) {
+					  List<Integer> result = new ArrayList<Integer>();
+					  result.add(e.v);
+					  
+					  while(x != e.v && x != -1) {
+						  result.add(x);
+						  x = parent[x];
+					  }
+					  return result;
+				  } else {
+					  neighbors.get(x).remove(i);
+				  }
+			  }
+		  }
+	  }
+	  
 	  return null;
   }
   
